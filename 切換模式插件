@@ -1,0 +1,39 @@
+package obj.myplugin;
+
+import org.bukkit.GameMode;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
+
+import static java.lang.Math.random;
+
+public class Myplugin extends JavaPlugin implements CommandExecutor {
+    private int modes = 0;
+    private Object Player;
+
+    @Override
+    public void onEnable() {     //插件被啟動執行
+
+        this.getCommand("Myplugin").setExecutor(this);
+        this.getLogger().info("指令切換模式插件     by星哥仔");
+    }
+
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        GameMode[] gamemodes = GameMode.values();
+        if (!(sender instanceof Player)){
+            sender.sendMessage("you are not player");
+
+            return false;
+        }
+        Player player = (Player) sender;
+        player.setGameMode(gamemodes[modes]);
+        sender.sendMessage(gamemodes[modes].toString());
+        if (++modes > gamemodes.length-1) modes = 0;
+
+        return true;
+    }
+}
