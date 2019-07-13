@@ -1,0 +1,7 @@
+name: Testplugin
+main: Testplugin
+version: 0.3
+commands:
+  Testplugin:
+    aliases: [get]
+
